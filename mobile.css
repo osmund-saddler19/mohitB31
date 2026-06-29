@@ -1,0 +1,64 @@
+/* Mobile Responsiveness Styles */
+
+@media (max-width: 968px) {
+    /* Hero Section */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 6rem;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        order: 2;
+    }
+    
+    .hero-visual {
+        display: none;
+    }
+    
+    .hero h1 {
+        font-size: 4rem; /* Adjusted slightly for mobile cursive */
+    }
+    
+    .hero-actions {
+        justify-content: center;
+    }
+    
+    /* Mobile Navigation menu layout */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70vw;
+        height: 100vh;
+        background: rgba(10, 5, 5, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        transition: right 0.4s ease;
+        z-index: 99;
+        border-left: 1px solid rgba(191, 21, 21, 0.2);
+    }
+    
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .menu-toggle {
+        display: block !important;
+        font-size: 1.8rem;
+        color: var(--accent);
+        cursor: pointer;
+        z-index: 101;
+    }
+}
+
+/* Hide hamburger menu toggle on desktop by default */
+.menu-toggle {
+    display: none;
+}

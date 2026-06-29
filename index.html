@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohit Waykole | Game Developer Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&family=Dancing+Script:wght@500;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="parallax.css">
+
+    <style>
+        .audio-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            color: inherit;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+        }
+
+        .audio-toggle:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .audio-toggle:active {
+            transform: translateY(0);
+        }
+
+        .audio-toggle.is-unmuted {
+            border-color: var(--accent, #00ffc8);
+            color: var(--accent, #00ffc8);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Three.js full-screen particle field -->
+    <canvas id="particle-canvas"
+        style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+    <!-- Video Backgrounds -->
+    <div class="video-background">
+        <video id="bg-vid-1" src="1st.mp4" autoplay loop muted playsinline class="bg-video"></video>
+        <video id="bg-vid-2" src="2nd.mp4" autoplay loop muted playsinline class="bg-video"></video>
+        <video id="bg-vid-3" src="3rd.mp4" autoplay loop muted playsinline class="bg-video"></video>
+        <video id="bg-vid-4" src="4th.mp4" autoplay loop muted playsinline class="bg-video"></video>
+        <video id="bg-vid-5" src="5th.mp4" autoplay loop muted playsinline class="bg-video"></video>
+    </div>
+
+    <!-- Background Tone (looping ambient/theme music) -->
+    <audio id="bg-audio" loop preload="auto" muted>
+        <source src="tone.mp4" type="audio/mpeg">
+    </audio>
+
+    <nav>
+        <div class="logo">MW.</div>
+        <div class="nav-links">
+            <button id="audio-toggle-btn" class="audio-toggle" type="button" aria-label="Unmute background music"
+                aria-pressed="false" title="Unmute background music">
+                <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact" class="btn-primary small">Contact Me</a>
+        </div>
+        <i class="fa-solid fa-bars menu-toggle"></i>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+
+                <h1 class="glitch" data-text="Mohit Waykole">Mohit<br>Waykole</h1>
+                <p class="subtitle">Computer Engineering Student | Aspiring Game & Full-Stack Developer</p>
+                <p class="intro">
+                    Hello, I'm <span class="cursive-name">Mohit Waykole.</span><br>
+                    Building immersive digital worlds and solving real-world problems through technology.
+                    <br><span class="highlight">"Learning, Building, and Growing Every Day."</span>
+                </p>
+                <div class="hero-actions">
+                    <a onclick="downloadCV()" class="btn-primary" href="javascript:void(0)">Download CV</a>
+                    <a href="#about" class="btn-secondary">Explore More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- User's 3D Avatar Image -->
+                <div class="avatar-container">
+                    <!-- Three.js crystal -->
+                    <div id="hero-canvas-wrap" style="width:100%;height:100%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">Who Am I?</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                    <p>I am a dedicated Computer Engineering student currently pursuing my diploma/degree at
+                        <strong>Shri Bhagubhai Mafatlal Polytechnic and College of Engineering</strong>.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <i class="fa-solid fa-microchip"></i>
+                    <p>My interest in technology started with programming and expanded into software development,
+                        databases, operating systems, game development, and modern web technologies.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <p>I believe in practical learning and continuously improve my skills through certifications,
+                        projects, and hands-on experimentation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Computer Engineering</h3>
+                        <h4>Shri Bhagubhai Mafatlal Polytechnic and College of Engineering</h4>
+                        <span class="date">2024 – Present</span>
+                        <p><strong>Relevant Coursework:</strong> Programming Fundamentals, Data Structures, DBMS,
+                            Computer Networks, OS, Digital Electronics, Software Eng, Web Tech.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Objective -->
+        <section id="objective" class="section">
+            <div class="objective-box neon-border">
+                <h2 class="section-title">Career Objective</h2>
+                <p>I aim to become a highly skilled <strong>Game Developer</strong> capable of creating immersive,
+                    engaging, and innovative gaming experiences. My passion lies in game design, gameplay programming,
+                    3D environments, and interactive technologies.</p>
+                <p>My focus is on strengthening my knowledge of Unity, Unreal Engine, C++, C#, 3D modeling, game
+                    mechanics, AI systems, and modern game development frameworks while contributing to meaningful
+                    projects that entertain, inspire, and connect players worldwide.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Game Dev & Design</h3>
+                    <ul class="skill-list">
+                        <li>Unity Engine 6</li>
+                        <li>Unreal Engine 5</li>
+                        <li>Blender 3D</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <ul class="skill-list">
+                        <li>C / C++</li>
+                        <li>C# / Java</li>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Web & Databases</h3>
+                    <ul class="skill-list">
+                        <li>HTML5 / CSS3</li>
+                        <li>Responsive Design</li>
+                        <li>SQL (Advanced)</li>
+                        <li>MongoDB</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & OS</h3>
+                    <ul class="skill-list">
+                        <li>Git / GitHub</li>
+                        <li>Linux / Kali Linux</li>
+                        <li>Computer Networks</li>
+                        <li>Problem Solving</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Achievements -->
+      <section id="certifications" class="section">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-brands fa-unity"></i></div>
+                    <h3>Unity Essentials</h3>
+                    <p class="issuer">Issued by Unity</p>
+                    <p>Foundational knowledge of Unity Engine, game dev workflows, scene creation, and interactive
+                        experiences.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>SQL (Advanced)</h3>
+                    <p class="issuer">Issued by HackerRank</p>
+                    <p>Complex Queries, Joins, Window Functions, Data Analysis, Database Optimization.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>SQL (Intermediate & Basic)</h3>
+                    <p class="issuer">Issued by HackerRank</p>
+                    <p>Subqueries, Aggregations, Data Filtering, Basic Database Operations.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-solid fa-trophy"></i></div>
+                    <h3>Key Achievements</h3>
+                    <ul class="achievements-list">
+                        <li>Proficiency in multiple programming languages.</li>
+                        <li>Experience with Git and GitHub workflows.</li>
+                        <li>Continuously expanding knowledge in computer engineering.</li>
+                    </ul>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-brands fa-github"></i></div>
+                    <h3>Introduction to GitHub</h3>
+                    <p class="issuer">Issued by Microsoft</p>
+                    <p>Fundamentals of GitHub, repositories, version control basics, and collaborative development
+                        workflows.</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-brands fa-git-alt"></i></div>
+                    <h3>Introduction to Git</h3>
+                    <p class="issuer">Issued by Microsoft</p>
+                    <p>Core concepts of Git, branching, commits, and distributed version control for software projects.
+                    </p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3>AI Skills Fest 2026</h3>
+                    <p class="issuer">Issued by Microsoft</p>
+                    <p>Hands-on AI tools and applied skills covered during Microsoft's AI Skills Fest 2026 event.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card hover-lift">
+                    <div class="project-img placeholder-img">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Nova Gaming Marketplace — 2024</h3>
+                        <p class="issuer">Interactive Gaming & E-Commerce Platform</p>
+                        <ul class="achievements-list">
+                            <li>Developed a modern gaming-themed website with immersive video backgrounds,
+                                animations, and responsive design.</li>
+                            <li>Built an integrated product marketplace allowing users to browse gaming-related
+                                products.</li>
+                            <li>Implemented interactive navigation, product sections, and user authentication
+                                pages.</li>
+                            <li>Designed engaging UI/UX with smooth transitions and multimedia content.</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card hover-lift">
+                    <div class="project-img placeholder-img">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Personal Portfolio Website — 2025</h3>
+                        <ul class="achievements-list">
+                            <li>Built a fully responsive personal portfolio website from scratch using vanilla HTML,
+                                CSS, and JavaScript.</li>
+                            <li>Implemented a dynamic video background system that changes contextually across
+                                different sections of the site.</li>
+                            <li>Showcases skills, certifications, and projects with smooth UI interactions and
+                                cross-browser compatibility.</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more projects here -->
+            </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section id="languages" class="section text-center">
+            <h2 class="section-title">Languages</h2>
+            <div class="lang-tags">
+                <span class="lang-tag">English</span>
+                <span class="lang-tag">Hindi</span>
+                <span class="lang-tag">Marathi</span>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact-box">
+                <h2 class="section-title">Let's Connect!</h2>
+                <p>Ready to build something amazing? Reach out to me.</p>
+                <div class="contact-links">
+                    <a href="mailto:your-mohitwaykole31@gmail.com" class="contact-item">
+                        <i class="fa-solid fa-envelope"></i> your-mohitwaykole31@gmail.com
+                    </a>
+                    <a href="https://github.com/osmund-saddler19" target="_blank" class="contact-item">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/mohit-waykole-196630335?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        class="contact-item">
+                        <i class="fa-brands fa-linkedin"></i> LinkedIn
+                    </a>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i> Mumbai, India
+                    </div>
+                    <a href="tel:+918879516321" class="contact-item">
+                        <i class="fa-solid fa-phone"></i> +91 8879516321
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mohit Waykole. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="mobile.js"></script>
+    <script src="parallax.js"></script>
+
+    <script>
+        // Background tone: loops continuously, toggled via the navbar button
+        (function () {
+            const toggleBtn = document.getElementById('audio-toggle-btn');
+            const icon = toggleBtn.querySelector('i');
+            const bgAudio = document.getElementById('bg-audio');
+            let isMuted = true;
+
+            // Start the loop immediately (muted, so autoplay is allowed by browsers)
+            bgAudio.muted = true;
+            bgAudio.play().catch(function () {
+                // Some browsers may still block this; it will start on first click instead
+            });
+
+            toggleBtn.addEventListener('click', function () {
+                isMuted = !isMuted;
+                bgAudio.muted = isMuted;
+
+                // Ensure playback is running now that we have a user gesture
+                if (!isMuted) {
+                    bgAudio.play().catch(function () {
+                        // If it still can't play, revert to muted state
+                        isMuted = true;
+                        bgAudio.muted = true;
+                        updateButtonUI(isMuted);
+                    });
+                }
+
+                updateButtonUI(isMuted);
+            });
+
+            function updateButtonUI(muted) {
+                if (muted) {
+                    icon.classList.remove('fa-volume-high');
+                    icon.classList.add('fa-volume-xmark');
+                    toggleBtn.classList.remove('is-unmuted');
+                    toggleBtn.setAttribute('aria-pressed', 'false');
+                    toggleBtn.setAttribute('aria-label', 'Unmute background music');
+                    toggleBtn.setAttribute('title', 'Unmute background music');
+                } else {
+                    icon.classList.remove('fa-volume-xmark');
+                    icon.classList.add('fa-volume-high');
+                    toggleBtn.classList.add('is-unmuted');
+                    toggleBtn.setAttribute('aria-pressed', 'true');
+                    toggleBtn.setAttribute('aria-label', 'Mute background music');
+                    toggleBtn.setAttribute('title', 'Mute background music');
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
